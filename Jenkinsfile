@@ -1,20 +1,14 @@
 
 pipeline {
-    agent any 
+    agent any
+    tools {
+        maven 'mvn-3.5.4'
+    }
     stages {
-        stage('Build') { 
+        stage('build') {
             steps {
-                println "Build" 
-            }
-        }
-        stage('Test') { 
-            steps {
-                println "Test" 
-            }
-        }
-        stage('Deploy') { 
-            steps {
-                println "Deploy" 
+                sh "mvn clean package spring-boot:repackage"
+                sh "printenv"
             }
         }
     }
